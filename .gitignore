@@ -1,0 +1,12 @@
+.cache
+.vscode/
+!.vscode/extensions.json
+build*
+.github
+!.github/workflows/ci.yaml
+*.txt
+!CMakeLists.txt
+coverage/
+*.profraw
+*.profdata
+actions-runner

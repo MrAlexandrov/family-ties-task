@@ -1,0 +1,15 @@
+---
+IndentWidth: 4
+AlignArrayOfStructures: Left
+AllowShortLambdasOnASingleLine: Empty
+SpaceBeforeCpp11BracedList: false
+AllowShortEnumsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: Empty
+AllowShortIfStatementsOnASingleLine: Never
+AlignAfterOpenBracket: BlockIndent
+BinPackParameters: true
+PointerAlignment: Left
+AccessModifierOffset: -4 # indent for private/protected/public
+InsertNewlineAtEOF: true
+AlwaysBreakTemplateDeclarations: Yes
+InsertBraces: true
