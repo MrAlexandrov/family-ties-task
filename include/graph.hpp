@@ -7,8 +7,6 @@
 
 namespace models {
 
-// Stable storage for Person and Couple objects (std::list never invalidates
-// pointers on insertion). A hash map provides O(1) lookup by name.
 class FamilyTree {
 public:
     FamilyTree() = default;
@@ -20,7 +18,6 @@ public:
         return ptr;
     }
 
-    // Create a Couple from two existing persons and link them to each other.
     Couple* AddCouple(Person* p1, Person* p2) {
         couples_.push_back({p1, p2, {}});
         Couple* c = &couples_.back();

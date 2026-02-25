@@ -1,23 +1,15 @@
 #pragma once
 
-// couple.hpp must be included by any file that calls Person::GetSpouse(),
-// GetParents(), or GetChildren(), because those method bodies live here —
-// they need the full definition of Couple to be compiled.
-
 #include "person.hpp"
 #include <vector>
 
 namespace models {
 
-// A married pair with their shared list of children.
-// Using a struct with public members because FamilyTree and the parser need
-// to push into children directly; no invariants to enforce here.
 struct Couple {
     Person* first = nullptr;
     Person* second = nullptr;
     std::vector<Person*> children;
 
-    // Returns the partner of `p`, or nullptr if `p` is not in this couple.
     Person* GetSpouseOf(const Person* p) const {
         if (p == first) {
             return second;
@@ -28,11 +20,6 @@ struct Couple {
         return nullptr;
     }
 };
-
-// -----------------------------------------------------------------------
-// Inline bodies of Person's smart accessors (declared in person.hpp).
-// Placed here so they can reference the fully-defined Couple.
-// -----------------------------------------------------------------------
 
 inline Person* Person::GetSpouse() const {
     return couple_ ? couple_->GetSpouseOf(this) : nullptr;

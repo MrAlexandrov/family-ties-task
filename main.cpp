@@ -7,25 +7,9 @@
 #include <utility>
 #include <vector>
 
-// ---------------------------------------------------------------------------
-// Graph traversal
-// ---------------------------------------------------------------------------
-// Each traversal state carries (current_person, came_from_person).
-// "came_from" prevents going back the same edge we just used, so that e.g.
-// "PC" (parent->child) yields siblings and not the person themselves.
-//
-// Traversal step characters (match relations.txt notation):
-//   P – go to either parent
-//   C – go to any child
-//   S – go to spouse (any gender)
-//   W – go to spouse only if she is female  (wife)
-//   H – go to spouse only if he is male     (husband)
-// ---------------------------------------------------------------------------
-
 namespace {
 
-using State =
-    std::pair<models::Person*, models::Person*>; // (current, came_from)
+using State = std::pair<models::Person*, models::Person*>;
 
 std::vector<models::Person*>
 TraversePath(models::Person* start, const std::string& path) {
@@ -37,7 +21,6 @@ TraversePath(models::Person* start, const std::string& path) {
         std::vector<State> next;
 
         for (auto [cur, from] : states) {
-            // Helper: enqueue `p` unless it is the node we came from.
             auto add = [&](models::Person* p) {
                 if (p && p != from) {
                     next.push_back({p, cur});
@@ -84,7 +67,6 @@ TraversePath(models::Person* start, const std::string& path) {
         states = std::move(next);
     }
 
-    // Collect unique persons, excluding the queried person themselves.
     std::set<models::Person*> seen;
     std::vector<models::Person*> result;
     for (auto [person, _] : states) {
@@ -96,10 +78,6 @@ TraversePath(models::Person* start, const std::string& path) {
 }
 
 } // namespace
-
-// ---------------------------------------------------------------------------
-// main
-// ---------------------------------------------------------------------------
 
 int main() {
     models::FamilyTree tree;
@@ -123,7 +101,6 @@ int main() {
     std::cout << "Введите имя: ";
     std::getline(std::cin, query);
 
-    // Trim the query just in case.
     while (!query.empty() && (query.back() == '\r' || query.back() == ' ')) {
         query.pop_back();
     }
