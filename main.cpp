@@ -117,7 +117,6 @@ int main() {
 
     std::cout << "\nРодственники для " << query << ":\n";
 
-    bool found_any = false;
     for (const auto& rel : relations) {
         auto found = TraversePath(person, rel.path);
         if (found.empty()) {
@@ -130,12 +129,7 @@ int main() {
                                           ? rel.male_term
                                           : rel.female_term;
             std::cout << term << ": " << p->GetName() << "\n";
-            found_any = true;
         }
-    }
-
-    if (!found_any) {
-        std::cout << "(родственников не найдено)\n";
     }
 
     return 0;
