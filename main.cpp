@@ -121,6 +121,7 @@ int main() {
     for (const auto& rel : relations) {
         auto found = TraversePath(person, rel.path);
         if (found.empty()) {
+            std::cout << rel.male_term << " и " << rel.female_term << ": нет\n";
             continue;
         }
 
